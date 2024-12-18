@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 
-const NavBar = ({}) => {
+const NavBar = ({ setEntries }) => {
   const [selectedDate, setSelectedDate] = useState("");
   const [newEntry, setNewEntry] = useState({
     date: "",
@@ -40,6 +40,7 @@ const NavBar = ({}) => {
       ...(JSON.parse(localStorage.getItem("entries")) || []),
     ];
 
+    setEntries(newEntries);
     localStorage.setItem("entries", JSON.stringify(newEntries));
 
     setNewEntry({ date: "", title: "", image: "", content: "" });
