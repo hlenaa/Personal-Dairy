@@ -9,12 +9,19 @@ const Entry = () => {
   const { id } = useParams(); // Extract the entry ID from the URL
   console.log("ID outside useEffect:", id);
   const [entry, setEntry] = useState(null);
+  const [entries, setEntries] = useState(
+    JSON.parse(localStorage.getItem("entries")) || []
+  );
 
   // Function to get the entry by ID from localStorage
   const getPost = (id) => {
     const entries = JSON.parse(localStorage.getItem("entries")) || [];
     console.log("Entries in localStorage:", entries);
     return entries.find((entry) => entry.id === id);
+  };
+
+  const handleUpdateEntries = (updatedEntries) => {
+    setEntries(updatedEntries); // Update the entries state
   };
 
   console.log(localStorage.getItem("entries"));
@@ -24,13 +31,13 @@ const Entry = () => {
     const fetchedEntry = getPost(id);
     console.log("Fetched Entry:", fetchedEntry);
     setEntry(fetchedEntry);
-  }, [id]);
+  }, [id, entries]);
 
   return (
     <div>
-      <NavBar />
+      <NavBar setEntries={setEntries} />
       {entry ? (
-        <Post entry={entry} />
+        <Post entry={entry} handleUpdateEntries={handleUpdateEntries} />
       ) : (
         <p className="text-center">Loading...</p>
       )}

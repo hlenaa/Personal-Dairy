@@ -1,4 +1,6 @@
-const Post = ({ entry }) => {
+import EditButton from "./EditButton";
+
+const Post = ({ entry, handleUpdateEntries }) => {
   return (
     <div>
       <p>{entry.date}</p>
@@ -9,6 +11,7 @@ const Post = ({ entry }) => {
       <div>
         <p>{entry.content}</p>
       </div>
+      <EditButton entry={entry} handleUpdateEntries={handleUpdateEntries} />
     </div>
   );
 };
