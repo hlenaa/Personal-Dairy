@@ -1,4 +1,5 @@
 import EditButton from "./EditButton";
+import DeleteButton from "./DeleteButton";
 
 const Post = ({ entry, handleUpdateEntries }) => {
   return (
@@ -12,6 +13,7 @@ const Post = ({ entry, handleUpdateEntries }) => {
         <p>{entry.content}</p>
       </div>
       <EditButton entry={entry} handleUpdateEntries={handleUpdateEntries} />
+      <DeleteButton entry={entry} />
     </div>
   );
 };
